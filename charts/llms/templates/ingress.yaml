@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fschat-ingress
+spec:
+  rules:
+    - host: fschat.server.com
+      http:
+        paths:
+          - path: /controller
+            pathType: Prefix
+            backend:
+              service:
+                name: fschat-service
+                port:
+                  number: 21001
+          - path: /openai
+            pathType: Prefix
+            backend:
+              service:
+                name: fschat-service
+                port:
+                  number: 8000
